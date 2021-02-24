@@ -1,4 +1,4 @@
-# AINews
+# AINews 👋
 Artificial Intelligence News
 
 <a href="https://github.com/Amadey2002/AINewsV1.0" rel="nofollow"> <img src="images/AInews.png" alt="AInews" width="70" height="80" style="max-width:100%;"> </a><br>
