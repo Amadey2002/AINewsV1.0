@@ -1,7 +1,7 @@
 <?php
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
-
+   
     $db = mysqli_connect('localhost', 'root','', 'users') or die("Ошибка " . mysqli_error($link));
   
     $queryEmail ="SELECT emailUser FROM usersdata";
@@ -10,7 +10,7 @@
     $resultEmail = mysqli_query($db, $queryEmail) or die("Ошибка " . mysqli_error($db)); 
     $resultPass = mysqli_query($db, $queryPass) or die("Ошибка " . mysqli_error($db));
     $rows = mysqli_num_rows($resultEmail);
-  
+    
     while ($row = mysqli_fetch_row($resultEmail)) {
       if($row[0] == $email){
        $resEmail = true;
@@ -31,9 +31,11 @@
     }
 
     if($resEmail && $resPass){
-      echo 'Вы успешно вошли';
+      $_SESSION['logged_user'] = $resEmail;
+      echo '<div style="color:dreen;">Вы авторизованы!<br> 
+      Можете перейти на <a href="../index.html">главную</a> страницу.</div><hr>';
     }else{
-      echo 'Попроюбуйте еще раз';
+      echo '<a href="login.php">Попроюбуйте еще раз</a>';
     }
   
     
