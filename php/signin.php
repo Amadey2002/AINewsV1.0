@@ -6,9 +6,18 @@
     $name = mysqli_real_escape_string($db, $_POST['name']); // получаем данные из формы 
     $email = mysqli_real_escape_string($db, $_POST['email']); //получаем данные из формы 
     $password = mysqli_real_escape_string($db, $_POST['password']); //получаем данные из формы 
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO usersdata  VALUES('$id','$name', '$email', '$password')";
-    mysqli_query($db, $query) or die("Ошибка " . mysqli_error($db));
+    $queryEmail ="SELECT emailUser FROM usersdata";
+    $resultEmail = mysqli_query($db, $queryEmail) or die("Ошибка " . mysqli_error($db)); 
+
+      $password = password_hash($password, PASSWORD_DEFAULT);
+      $query = "INSERT INTO usersdata  VALUES('$id','$name', '$email', '$password')";
+      mysqli_query($db, $query);
+      if(mysqli_error($db)){
+          $result = 'Такая почта уже есть';
+      }else{
+          $result = 'Все ок';
+      }
+
 
     include('login.phtml'); //importing a file
 ?>
